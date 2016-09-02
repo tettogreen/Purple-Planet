@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 	public Boundery boundery;
 	public float tilt;
 	public Done_Boundary boundary;
-	private Rigidbody rigid;
+	private Rigidbody rigidbody;
 
 	public GameObject shot;
 	public Transform[] shotSpawns;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
-		rigid = GetComponent<Rigidbody>();
+		rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	void Update ()
@@ -32,7 +32,9 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
 			foreach (var shotSpawn in shotSpawns) {
-				Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+				//locking x rotation and then instantiating a shot
+				Vector3 rotation = new Vector3 (0.0f, shotSpawn.rotation.y, shotSpawn.rotation.z);
+				Instantiate (shot, shotSpawn.position, Quaternion.Euler(rotation));
 			}
 			//GetComponent<AudioSource>().Play ();
 		}
@@ -40,8 +42,6 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-
-
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 		Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
@@ -49,16 +49,15 @@ public class PlayerController : MonoBehaviour
 //            var mousePosition = Input.mousePosition;
 //            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 //		transform.position = Vector2.Lerp (transform.position, movement, speed);
-		rigid.velocity = movement * speed;
-		Debug.Log(movement);
-		rigid.position = new Vector3 
-		(
-			Mathf.Clamp(rigid.position.x, boundary.xMin, boundary.xMax ),
-			Mathf.Clamp(rigid.position.y, boundary.yMin, boundary.yMax ),
+		rigidbody.velocity = movement * speed;
+		rigidbody.position = new Vector3 (
+			Mathf.Clamp (rigidbody.position.x, boundary.xMin, boundary.xMax),
+			Mathf.Clamp (rigidbody.position.y, boundary.yMin, boundary.yMax),
 			0.0f
 		);
 
-		rigid.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
+		//Tilt
+		rigidbody.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
 	}
  
 

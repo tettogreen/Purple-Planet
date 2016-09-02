@@ -12,13 +12,13 @@ public class LockRotation : MonoBehaviour {
 	{
 		Vector3 rotation = transform.rotation.eulerAngles;
 		if (x) {
-			rotation.x = 0f;
+			rotation.x = 0.0f;
 		}
 		if (y) {
-			rotation.y = 0f;
+			rotation.y = 0.0f;
 		}
 		if (z) {
-			rotation.z = 0f;
+			rotation.z = 0.0f;
 		}
 		transform.rotation = Quaternion.Euler (rotation);
 	}
