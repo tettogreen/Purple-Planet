@@ -37,7 +37,6 @@ public class Done_PlayerController : MonoBehaviour
 
 		Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
 		GetComponent<Rigidbody>().velocity = movement * speed;
-		GetComponent<Rigidbody>().position = Input.mousePosition/100;
 		
 //		GetComponent<Rigidbody>().position = new Vector3
 //		(
