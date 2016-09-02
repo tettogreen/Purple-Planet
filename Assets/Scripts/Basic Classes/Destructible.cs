@@ -22,16 +22,21 @@ public class Destructible : MonoBehaviour {
 	public void TakeDamage (int damage)
 	{
 		health -= damage;
-		Debug.Log (name + " takes" + collisionDamage +" damage." + health + " left.");
+		Debug.Log (name + " takes" + collisionDamage + " damage." + health + " left.");
 		if (health <= 0) {
-			Destroy(gameObject);
-			Debug.Log(name + " is dead!");
+			Destruct();
 		}
+
+	}
+
+	public void Destruct ()
+	{
+		Debug.Log(name + " is dead!");
+		Destroy(gameObject);
 		if (explosion != null)
 		{
 			Instantiate(explosion, transform.position, transform.rotation);
 		}
 	}
-
 
 }
