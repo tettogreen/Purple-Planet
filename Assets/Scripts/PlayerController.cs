@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 			foreach (var shotSpawn in shotSpawns) {
 				//locking x rotation and then instantiating a shot
 				Vector3 rotation = new Vector3 (0.0f, shotSpawn.rotation.y, shotSpawn.rotation.z);
-				Instantiate (shot, shotSpawn.position, Quaternion.Euler(rotation));
+				Instantiate (shot, shotSpawn.position, Quaternion.Euler(rotation), transform);
 			}
 			//GetComponent<AudioSource>().Play ();
 		}
