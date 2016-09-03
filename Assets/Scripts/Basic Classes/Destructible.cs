@@ -7,6 +7,7 @@ public class Destructible : MonoBehaviour {
 	public int scoreValue;
 	public GameObject explosion;
 
+
 	[SerializeField]
 	private int collisionDamage = 50;
 	public int CollisionDamage 	{ get { return collisionDamage; } }
@@ -31,12 +32,27 @@ public class Destructible : MonoBehaviour {
 
 	public void Destruct ()
 	{
-		Debug.Log(name + " is dead!");
-		Destroy(gameObject);
+		Debug.Log (name + " is dead!");
+		if (transform.parent.tag == "PoolObject") {
+			gameObject.SetActive(false);
+		} else {
+			Destroy (gameObject);
+		}
+	}
+
+	public void Destruct (bool withExplosion)
+	{
+		Destruct();
 		if (explosion != null)
 		{
 			Instantiate(explosion, transform.position, transform.rotation);
 		}
+	}
+
+	public IEnumerator Destruct (float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		Destruct(true);
 	}
 
 }

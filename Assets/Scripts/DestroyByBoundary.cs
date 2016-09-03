@@ -5,7 +5,7 @@ public class DestroyByBoundary : MonoBehaviour {
 
 	void OnTriggerExit(Collider other)
     {
-        Destroy(other.gameObject);
+       other.GetComponent<Destructible>().Destruct();
         Debug.Log (other);
     }
 }

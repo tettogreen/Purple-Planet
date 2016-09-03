@@ -3,12 +3,5 @@ using System.Collections;
 
 public class CitizenShip : Destructible
 {
-	
-
-	void Start ()
-	{
-
-	}
-
 
 }
