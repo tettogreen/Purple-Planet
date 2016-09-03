@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 	public Boundery boundery;
 	public float tilt;
 	public Done_Boundary boundary;
-	private Rigidbody rigidbody;
+	private Rigidbody rigid;
 
 	public GameObject shot;
 	public Transform[] shotSpawns;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
-		rigidbody = GetComponent<Rigidbody>();
+		rigid = GetComponent<Rigidbody>();
 	}
 	
 	void Update ()
@@ -49,15 +49,15 @@ public class PlayerController : MonoBehaviour
 //            var mousePosition = Input.mousePosition;
 //            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 //		transform.position = Vector2.Lerp (transform.position, movement, speed);
-		rigidbody.velocity = movement * speed;
-		rigidbody.position = new Vector3 (
-			Mathf.Clamp (rigidbody.position.x, boundary.xMin, boundary.xMax),
-			Mathf.Clamp (rigidbody.position.y, boundary.yMin, boundary.yMax),
+		rigid.velocity = movement * speed;
+		rigid.position = new Vector3 (
+			Mathf.Clamp (rigid.position.x, boundary.xMin, boundary.xMax),
+			Mathf.Clamp (rigid.position.y, boundary.yMin, boundary.yMax),
 			0.0f
 		);
 
 		//Tilt
-		rigidbody.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
+		rigid.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
 	}
  
 

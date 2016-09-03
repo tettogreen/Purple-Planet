@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour {
 
-	public float speed;
 
 	protected GameObject shooter;
 

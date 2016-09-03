@@ -5,7 +5,6 @@ public class Laser : Weapon
 {
 	void Start ()
 	{
-		GetComponent<Rigidbody>().velocity = transform.up * speed;
 	}
 
 	void OnTriggerEnter (Collider other)
