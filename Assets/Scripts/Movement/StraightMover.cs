@@ -20,9 +20,13 @@ public class StraightMover : Mover {
 		Vector3 direction = new Vector3 (direcionX, direcionY, direcionZ);
 		GetComponent<Rigidbody>().velocity = direction * speed;
 	}
-	
+
+//	void OnCollisonEnter (Collision collsion)
+//	{
+//		
+//	}
+
 	// Update is called once per frame
 	void Update () {
-	
 	}
 }

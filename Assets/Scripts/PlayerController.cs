@@ -60,5 +60,8 @@ public class PlayerController : MonoBehaviour
 		rigid.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
 	}
  
-
+ 	public void Destruct ()
+	{
+		//TODO Add GameOver() action
+	}
 }
