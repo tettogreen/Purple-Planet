@@ -5,7 +5,10 @@ public class DestroyByBoundary : MonoBehaviour {
 
 	void OnTriggerExit(Collider other)
     {
-       other.GetComponent<Destructible>().Destruct();
-        Debug.Log (other);
+		Destructible destructible = other.GetComponent<Destructible>();
+    	if (destructible != null) {
+       		other.GetComponent<Destructible>().Destruct();
+       	}
+//        Debug.Log (other);
     }
 }

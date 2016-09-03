@@ -3,21 +3,33 @@ using System.Collections;
 
 public class Destructible : MonoBehaviour {
 
-	public int health;
+	[SerializeField]
+	private int health;
 	public int scoreValue;
 	public GameObject explosion;
 
+	private int defaultHealth;
 
 	[SerializeField]
 	private int collisionDamage = 50;
 	public int CollisionDamage 	{ get { return collisionDamage; } }
 
+	void Awake() {
+		Debug.Log(gameObject.name);
+		defaultHealth = health;
+	}
+
 	void OnCollisionEnter (Collision collision)
 	{
 		Collider col = collision.collider;
 		if (col.tag == "Player" || col.tag == "Enemy") {
-			TakeDamage (col.GetComponent<Destructible>().collisionDamage);
+			TakeDamage (col.GetComponent<Destructible>().CollisionDamage);
 		}
+	}
+
+	public void OnEnable ()
+	{
+		health = defaultHealth;
 	}
 
 	public void TakeDamage (int damage)
@@ -30,10 +42,11 @@ public class Destructible : MonoBehaviour {
 
 	}
 
+
 	public void Destruct ()
 	{
-		Debug.Log (name + " is dead!");
-		if (transform.parent.tag == "PoolObject") {
+//		Debug.Log (name + " is dead!");
+		if (transform.parent != null && transform.parent.tag == "PoolObject") {
 			gameObject.SetActive(false);
 		} else {
 			Destroy (gameObject);
