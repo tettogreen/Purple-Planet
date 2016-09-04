@@ -24,10 +24,10 @@ public class Spawner : ObjectPool {
 		yield return new WaitForSeconds (startWait);
 		while (gameObject != null) {
 			foreach (Transform spawnPoint in SpawnPoints) {
-				Quaternion spawnRotation = Quaternion.identity;
 				GameObject spawnie = PoolObject ();
 				//spawnie.transform.position = spawnValues;
 				spawnie.transform.position = spawnPoint.transform.position;
+				spawnie.transform.rotation = spawnPoint.transform.rotation;
 				spawnie.SetActive (true);
 			}
 			yield return new WaitForSeconds (spawnWait);

@@ -6,7 +6,7 @@ public class ObjectPool : MonoBehaviour {
 
 	public GameObject pooledObject;
 	public int poolSize = 20;
-	public bool willGrow;
+	public bool willGrow = true;
 
 	List<GameObject> pooledObjects;
 
@@ -16,9 +16,7 @@ public class ObjectPool : MonoBehaviour {
 	{
 		pooledObjects = new List<GameObject> ();
 		for (int i = 0; i < poolSize; i++) {
-			GameObject obj = (GameObject)Instantiate(pooledObject, gameObject.transform);
-			obj.SetActive(false);
-			pooledObjects.Add(obj);
+			AddToPool();
 		}
 	}
 	
@@ -33,11 +31,17 @@ public class ObjectPool : MonoBehaviour {
 		}
 
 		if (willGrow) {
-			GameObject obj = (GameObject)Instantiate(pooledObject);
-			pooledObjects.Add(obj);
-			return obj;
+			return AddToPool();
 		}
 
 		return null;
+	}
+
+	GameObject AddToPool ()
+	{
+		GameObject obj = (GameObject)Instantiate(pooledObject, gameObject.transform);
+		obj.SetActive(false);
+		pooledObjects.Add(obj);
+		return obj;
 	}
 }

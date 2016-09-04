@@ -15,11 +15,15 @@ public class Destructible : MonoBehaviour {
 	//Seconds between each colision damage
 	private const float collisionDamageRate = 1.0f;
 
+	//Audio
+	private DestructibleSoundController soundPlayer;
+
 	public int CollisionDamage 	{ get { return collisionDamage; } }
 
 	void Awake() {
 		Debug.Log(gameObject.name);
 		defaultHealth = health;
+		soundPlayer = GetComponentInChildren<DestructibleSoundController>();
 	}
 
 	void OnCollisionEnter (Collision collision)
@@ -40,7 +44,7 @@ public class Destructible : MonoBehaviour {
 		health -= damage;
 		Debug.Log (name + " takes" + collisionDamage + " damage." + health + " left.");
 		if (health <= 0) {
-			Destruct();
+			Destruct(true);
 		}
 
 	}
@@ -62,6 +66,7 @@ public class Destructible : MonoBehaviour {
 		if (explosion != null)
 		{
 			Instantiate(explosion, transform.position, transform.rotation);
+			soundPlayer.PlayExplosion();
 		}
 	}
 

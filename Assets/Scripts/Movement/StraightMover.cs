@@ -16,15 +16,20 @@ public class StraightMover : Mover {
 
 	[Range(-1, 1)]
 	public int direcionZ;
+	public bool useGlobalSpace;
 
 	private Rigidbody rigid;
 	private Vector3 direction;
 
 	// Use this for initialization
-	void Start () {
-		rigid = GetComponent<Rigidbody>();
-		direction = new Vector3 (direcionX, direcionY, direcionZ);
-		rigid.velocity = direction * speed;
+	void Start ()
+	{
+		rigid = GetComponent<Rigidbody> ();
+		if (useGlobalSpace) {
+			SetDirection (Vector3.right, Vector3.up, Vector3.forward);
+		} else {
+			SetDirection (transform.right, transform.up, transform.forward);
+		}
 	}
 
 //	void OnCollisonEnter (Collision collsion)
@@ -46,15 +51,11 @@ public class StraightMover : Mover {
 		rigid.velocity = Vector3.Lerp(rigid.velocity, direction * speed, speed * turnSpeed );
 	}
 
-//	void Align ()
-//	{
-//		rigid.velocity = Vector3.Lerp(rigid.velocity, direction * speed,  turnSpeed );
-//	}
-
-//	void OnCollisionExit (Collision collision)
-//	{
-//		if (rigid.velocity != direction * speed) {
-//			Align();
-//		}
-//	}
+	// Sets direction according to input axis
+	void SetDirection (Vector3 xAxis, Vector3 yAxis, Vector3 zAxis)
+	{
+		direction = xAxis * direcionX + yAxis * direcionY + zAxis * direcionZ;
+		rigid.velocity = direction * speed;
+	}
 }
+	

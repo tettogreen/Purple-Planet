@@ -19,29 +19,24 @@ public class PlayerController : MonoBehaviour
 	public Transform[] shotSpawns;
 	public float fireRate;
 
+	//Audio
+	private DestructibleSoundController soundPlayer;
 
 	private float nextFire;
 
-	void Start ()
-	{
+	void Awake() {
 		rigid = GetComponent<Rigidbody>();
-	}
-	
-	void Update ()
-	{
-		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
-			nextFire = Time.time + fireRate;
-			foreach (var shotSpawn in shotSpawns) {
-				//locking x rotation and then instantiating a shot
-				Vector3 rotation = new Vector3 (0.0f, shotSpawn.rotation.y, shotSpawn.rotation.z);
-				Instantiate (shot, shotSpawn.position, Quaternion.Euler(rotation), transform);
-			}
-			//GetComponent<AudioSource>().Play ();
-		}
+		soundPlayer = GetComponentInChildren<DestructibleSoundController>();
 	}
 
 	void FixedUpdate ()
 	{
+		//Shooting
+		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
+			Shoot ();
+		}
+
+		//Movement
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 		Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
@@ -63,5 +58,16 @@ public class PlayerController : MonoBehaviour
  	public void Destruct ()
 	{
 		//TODO Add GameOver() action
+	}
+
+	public void Shoot ()
+	{
+		nextFire = Time.time + fireRate;
+		foreach (var shotSpawn in shotSpawns) {
+		//locking x rotation and then instantiating a shot
+		Vector3 rotation = new Vector3 (0.0f, shotSpawn.rotation.y, shotSpawn.rotation.z);
+		Instantiate (shot, shotSpawn.position, Quaternion.Euler(rotation), transform);
+		}
+		soundPlayer.PlayShot();
 	}
 }
