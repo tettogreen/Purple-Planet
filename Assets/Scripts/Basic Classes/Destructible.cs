@@ -3,15 +3,18 @@ using System.Collections;
 
 public class Destructible : MonoBehaviour {
 
-	[SerializeField]
-	private int health;
 	public int scoreValue;
 	public GameObject explosion;
 
+	[SerializeField]
+	private int health;
 	private int defaultHealth;
 
 	[SerializeField]
 	private int collisionDamage = 50;
+	//Seconds between each colision damage
+	private const float collisionDamageRate = 1.0f;
+
 	public int CollisionDamage 	{ get { return collisionDamage; } }
 
 	void Awake() {
