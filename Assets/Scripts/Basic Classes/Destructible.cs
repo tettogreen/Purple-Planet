@@ -3,52 +3,10 @@ using System.Collections;
 
 public class Destructible : MonoBehaviour {
 
-	public int scoreValue;
 	public GameObject explosion;
-
-	[SerializeField]
-	private int health;
-	private int defaultHealth;
-
-	[SerializeField]
-	private int collisionDamage = 50;
-	//Seconds between each colision damage
-	private const float collisionDamageRate = 1.0f;
-
+	
 	//Audio
-	private DestructibleSoundController soundPlayer;
-
-	public int CollisionDamage 	{ get { return collisionDamage; } }
-
-	void Awake() {
-		Debug.Log(gameObject.name);
-		defaultHealth = health;
-		soundPlayer = GetComponentInChildren<DestructibleSoundController>();
-	}
-
-	void OnCollisionEnter (Collision collision)
-	{
-		Collider col = collision.collider;
-		if (col.tag == "Player" || col.tag == "Enemy") {
-			TakeDamage (col.GetComponent<Destructible>().CollisionDamage);
-		}
-	}
-
-	public void OnEnable ()
-	{
-		health = defaultHealth;
-	}
-
-	public void TakeDamage (int damage)
-	{
-		health -= damage;
-		Debug.Log (name + " takes" + collisionDamage + " damage." + health + " left.");
-		if (health <= 0) {
-			Destruct(true);
-		}
-
-	}
-
+	protected DestructibleSoundController soundPlayer;
 
 	public void Destruct ()
 	{
@@ -68,12 +26,16 @@ public class Destructible : MonoBehaviour {
 			Instantiate(explosion, transform.position, transform.rotation);
 			soundPlayer.PlayExplosion();
 		}
+	} 
+
+	public void Destruct (float delay)
+	{
+		StartCoroutine (DestructIn(delay));
 	}
 
-	public IEnumerator Destruct (float delay)
+	private IEnumerator DestructIn (float time)
 	{
-		yield return new WaitForSeconds(delay);
+		yield return new WaitForSeconds(time);
 		Destruct(true);
 	}
-
 }

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	public Done_Boundary boundary;
 	private Rigidbody rigid;
 
+	public GameObject[] weapons;
 	public GameObject shot;
 	public Transform[] shotSpawns;
 	public float fireRate;
@@ -27,14 +28,22 @@ public class PlayerController : MonoBehaviour
 	void Awake() {
 		rigid = GetComponent<Rigidbody>();
 		soundPlayer = GetComponentInChildren<DestructibleSoundController>();
+
+
 	}
 
 	void FixedUpdate ()
 	{
 		//Shooting
-		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
-			Shoot ();
+		if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
+			nextFire = Time.time + fireRate;
+			StartFire();
+			soundPlayer.PlayShot ();
 		}
+		if (Input.GetButtonUp ("Fire1") && Time.time > nextFire) {
+			StopFire();
+		}
+//		if
 
 		//Movement
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -54,20 +63,31 @@ public class PlayerController : MonoBehaviour
 		//Tilt
 		rigid.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
 	}
- 
+
+	private void StartFire ()
+	{
+		weapons[0].GetComponent<Spawner>().StartSpawning();
+	}
+
+	private void StopFire ()
+	{
+		weapons[0].GetComponent<Spawner>().StopSpawning();
+	}
+
  	public void Destruct ()
 	{
 		//TODO Add GameOver() action
 	}
 
-	public void Shoot ()
-	{
-		nextFire = Time.time + fireRate;
-		foreach (var shotSpawn in shotSpawns) {
-		//locking x rotation and then instantiating a shot
-		Vector3 rotation = new Vector3 (0.0f, shotSpawn.rotation.y, shotSpawn.rotation.z);
-		Instantiate (shot, shotSpawn.position, Quaternion.Euler(rotation), transform);
-		}
-		soundPlayer.PlayShot();
-	}
+//	IEnumerator Shoot ()
+//	{
+//		
+//		nextFire = Time.time + fireRate;
+//		foreach (var shotSpawn in shotSpawns) {
+//		//locking x rotation and then instantiating a shot
+//		Vector3 rotation = new Vector3 (0.0f, shotSpawn.rotation.y, shotSpawn.rotation.z);
+//		Instantiate (shot, shotSpawn.position, Quaternion.Euler(rotation), transform);
+//		}
+//		soundPlayer.PlayShot();
+//	}
 }

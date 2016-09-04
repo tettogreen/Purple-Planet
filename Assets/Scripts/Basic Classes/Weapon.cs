@@ -1,22 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : Destructible {
 
-
-	protected GameObject shooter;
+	protected Transform owner;
 
 	[SerializeField]
 	protected int damage;
 	//public int Damage {get { return damage; } }
 
-	void Awake ()
+	void Start ()
 	{
-		if (transform.parent != null) {
-			shooter = transform.parent.gameObject;
-			transform.parent = null;
+//		if (owner == null) {
+//			FindOwner(transform.parent);
 //			Collider coll = GetComponent<CapsuleCollider> ();
 //			coll.enabled = true;
+//		}
+	}
+
+//	public void SetOwner (GameObject _owner)
+//	{
+//		owner = _owner;
+//	}
+
+	protected void FindOwner (Transform parent)
+	{
+		if (parent == null) {
+			return;
+		} else if (parent.tag == "Player" || parent.tag == "Enemy") {
+			owner = parent;
+		} else {
+			FindOwner (parent.parent);
 		}
 	}
 }

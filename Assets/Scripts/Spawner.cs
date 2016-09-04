@@ -4,18 +4,21 @@ using System.Collections;
 public class Spawner : ObjectPool {
 
 	public Transform[] SpawnPoints;
-//	public Vector3 spawnValues;
-//	public int spawniesCount;
-	//Time between each spawn
-	public float spawnWait;
+	public bool automaticStart;
 	//Time before the first spawn
 	public float startWait;
+	//Time between each spawn
+	public float spawnWait;
 	//Time between waves
 	public float waveWait;
 
+	private bool isSpawning = false;
+
 	void Start ()
 	{
-		StartCoroutine (SpawnWaves());
+		if (automaticStart) {
+			StartCoroutine (SpawnWaves ());
+		}
 	}
 
 	//Couritne!
@@ -33,5 +36,25 @@ public class Spawner : ObjectPool {
 			yield return new WaitForSeconds (spawnWait);
 		}
 		yield return new WaitForSeconds (waveWait);
+	}
+
+	public void StartSpawning (float startDelay, float spawnInterval, float waveInterval)
+	{
+		startDelay = startWait;
+		spawnWait = spawnInterval;
+		waveWait = waveInterval;
+		StartSpawning();
+	}
+
+	public void StartSpawning ()
+	{
+		if (isSpawning == false) {
+			StartCoroutine (SpawnWaves());
+		} 
+	}
+
+	public void StopSpawning ()
+	{
+		StopAllCoroutines();
 	}
 }

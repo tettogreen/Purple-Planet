@@ -39,7 +39,8 @@ public class ObjectPool : MonoBehaviour {
 
 	GameObject AddToPool ()
 	{
-		GameObject obj = (GameObject)Instantiate(pooledObject, gameObject.transform);
+		GameObject obj = (GameObject)Instantiate(pooledObject, transform);
+//		obj.transform.parent = gameObject.transform;
 		obj.SetActive(false);
 		pooledObjects.Add(obj);
 		return obj;

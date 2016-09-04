@@ -16,7 +16,7 @@ public class DestroyTimer : MonoBehaviour {
 	void Activate ()
 	{
 		if (GetComponent<Destructible>() != null) {
-			StartCoroutine (GetComponent<Destructible> ().Destruct (time));
+			GetComponent<Destructible> ().Destruct (time);
 		} else {
 			Destroy (gameObject, time);
 		}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SimpleKamikaze : Destructible {
+public class SimpleKamikaze : DestructibleWithHealth {
 
 	// Use this for initialization
 	void Start () {
