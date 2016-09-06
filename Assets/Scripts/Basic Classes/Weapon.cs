@@ -1,36 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : Destructible {
+public class Weapon : Spawner {
 
-	protected Transform owner;
 
-	[SerializeField]
-	protected int damage;
-	//public int Damage {get { return damage; } }
+	public GameObject shot;
+	public Transform[] shotSpawns;
+	public float fireRate;
 
-	void Start ()
+	//Audio
+	public AudioSource shotSound;
+
+	private float nextFire;
+
+		void Update ()
 	{
-//		if (owner == null) {
-//			FindOwner(transform.parent);
-//			Collider coll = GetComponent<CapsuleCollider> ();
-//			coll.enabled = true;
-//		}
-	}
-
-//	public void SetOwner (GameObject _owner)
-//	{
-//		owner = _owner;
-//	}
-
-	protected void FindOwner (Transform parent)
-	{
-		if (parent == null) {
-			return;
-		} else if (parent.tag == "Player" || parent.tag == "Enemy") {
-			owner = parent;
-		} else {
-			FindOwner (parent.parent);
+		//Shooting
+		if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
+			Debug.Log("Started shooting");
+			nextFire = Time.time + fireRate;
+			StartFire ();
+			if (shotSound) {
+				shotSound.loop = true;
+				shotSound.Play ();
+			}
+		}
+		if (Input.GetButtonUp ("Fire1")) {
+			Debug.Log("Ended shooting");
+			StopFire ();
+			shotSound.loop = false;
 		}
 	}
+	
+	public void StartFire ()
+	{
+		StartSpawning();
+	}
+
+	public void StopFire ()
+	{
+		StopSpawning();
+	}
 }
+

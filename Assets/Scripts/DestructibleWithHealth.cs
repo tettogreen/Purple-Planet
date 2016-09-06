@@ -20,7 +20,6 @@ public class DestructibleWithHealth : Destructible {
 	void Awake() {
 		Debug.Log(gameObject.name);
 		defaultHealth = health;
-		soundPlayer = GetComponentInChildren<DestructibleSoundController>();
 	}
 
 	void OnCollisionEnter (Collision collision)

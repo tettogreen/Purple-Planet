@@ -12,37 +12,32 @@ public class PlayerController : MonoBehaviour
 	public float speed;
 	public Boundery boundery;
 	public float tilt;
+	public Weapon[] weapons;
 	public Done_Boundary boundary;
 	private Rigidbody rigid;
 
-	public GameObject[] weapons;
-	public GameObject shot;
-	public Transform[] shotSpawns;
-	public float fireRate;
 
-	//Audio
-	private DestructibleSoundController soundPlayer;
-
-	private float nextFire;
-
-	void Awake() {
-		rigid = GetComponent<Rigidbody>();
-		soundPlayer = GetComponentInChildren<DestructibleSoundController>();
-
+	void Awake ()
+	{
+		rigid = GetComponent<Rigidbody> ();
+		foreach (Weapon weapon in weapons) {
+			weapon.gameObject.SetActive(false);
+		}
+		weapons[0].gameObject.SetActive(true);
 
 	}
 
 	void FixedUpdate ()
 	{
-		//Shooting
-		if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
-			nextFire = Time.time + fireRate;
-			StartFire();
-			soundPlayer.PlayShot ();
-		}
-		if (Input.GetButtonUp ("Fire1") && Time.time > nextFire) {
-			StopFire();
-		}
+//		//Shooting
+//		if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
+//			nextFire = Time.time + fireRate;
+//			StartFire();
+//			soundPlayer.PlayShot ();
+//		}
+//		if (Input.GetButtonUp ("Fire1") && Time.time > nextFire) {
+//			StopFire();
+//		}
 //		if
 
 		//Movement

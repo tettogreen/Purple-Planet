@@ -24,7 +24,9 @@ public class Spawner : ObjectPool {
 	//Couritne!
 	IEnumerator SpawnWaves ()
 	{
-		yield return new WaitForSeconds (startWait);
+		if (startWait != 0) {
+			yield return new WaitForSeconds (startWait);
+		}
 		while (gameObject != null) {
 			foreach (Transform spawnPoint in SpawnPoints) {
 				GameObject spawnie = PoolObject ();
@@ -35,7 +37,9 @@ public class Spawner : ObjectPool {
 			}
 			yield return new WaitForSeconds (spawnWait);
 		}
-		yield return new WaitForSeconds (waveWait);
+		if (waveWait != 0) {
+			yield return new WaitForSeconds (waveWait);
+		}
 	}
 
 	public void StartSpawning (float startDelay, float spawnInterval, float waveInterval)
@@ -48,13 +52,17 @@ public class Spawner : ObjectPool {
 
 	public void StartSpawning ()
 	{
-		if (isSpawning == false) {
+		if (!isSpawning) {
 			StartCoroutine (SpawnWaves());
+			isSpawning = true;
 		} 
 	}
 
 	public void StopSpawning ()
 	{
-		StopAllCoroutines();
+		if (isSpawning) {
+			StopAllCoroutines ();
+			isSpawning = false;
+		}
 	}
 }

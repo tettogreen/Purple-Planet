@@ -4,9 +4,10 @@ using System.Collections;
 public class Destructible : MonoBehaviour {
 
 	public GameObject explosion;
+	public AudioClip explosionSound;
 	
 	//Audio
-	protected DestructibleSoundController soundPlayer;
+	//protected DestructibleSoundController soundPlayer;
 
 	public void Destruct ()
 	{
@@ -20,11 +21,12 @@ public class Destructible : MonoBehaviour {
 
 	public void Destruct (bool withExplosion)
 	{
-		Destruct();
-		if (explosion != null)
-		{
-			Instantiate(explosion, transform.position, transform.rotation);
-			soundPlayer.PlayExplosion();
+		Destruct ();
+		if (explosion != null) {
+			Instantiate (explosion, transform.position, transform.rotation);
+			if (explosionSound) {
+				AudioSource.PlayClipAtPoint (explosionSound, transform.position);
+			}
 		}
 	} 
 
