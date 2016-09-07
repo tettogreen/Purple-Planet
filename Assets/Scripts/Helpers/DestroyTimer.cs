@@ -3,12 +3,12 @@ using System.Collections;
 
 public class DestroyTimer : MonoBehaviour {
 
-	public bool activated;
+	public bool activateManually;
 	public float time;
 	// Use this for initialization
 	void Start ()
 	{
-		if (activated) {
+		if (!activateManually) {
 			Activate();
 		}
 	}

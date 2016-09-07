@@ -3,17 +3,19 @@ using System.Collections;
 using System.Linq;
 
 [System.Serializable]
-public class Boundery {
-	public float xMin, xMax, yMin, yMax;
+public class Boundary {
+	public Vector2 Min, Max;
+
 }
 
 public class PlayerController : MonoBehaviour 
 {
 	public float speed;
-	public Boundery boundery;
+	public Boundary boundary;
 	public float tilt;
 	public Weapon[] weapons;
-	public Done_Boundary boundary;
+
+
 	private Rigidbody rigid;
 
 
@@ -29,16 +31,6 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-//		//Shooting
-//		if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
-//			nextFire = Time.time + fireRate;
-//			StartFire();
-//			soundPlayer.PlayShot ();
-//		}
-//		if (Input.GetButtonUp ("Fire1") && Time.time > nextFire) {
-//			StopFire();
-//		}
-//		if
 
 		//Movement
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -49,9 +41,12 @@ public class PlayerController : MonoBehaviour
 //            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 //		transform.position = Vector2.Lerp (transform.position, movement, speed);
 		rigid.velocity = movement * speed;
+
+		Vector2 min = transform.parent.TransformPoint(boundary.Min);
+		Vector2 max = transform.parent.TransformPoint(boundary.Max);
 		rigid.position = new Vector3 (
-			Mathf.Clamp (rigid.position.x, boundary.xMin, boundary.xMax),
-			Mathf.Clamp (rigid.position.y, boundary.yMin, boundary.yMax),
+			Mathf.Clamp (rigid.position.x, min.x, max.x),
+			Mathf.Clamp (rigid.position.y, min.y, max.y),
 			0.0f
 		);
 
@@ -59,15 +54,6 @@ public class PlayerController : MonoBehaviour
 		rigid.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
 	}
 
-	private void StartFire ()
-	{
-		weapons[0].GetComponent<Spawner>().StartSpawning();
-	}
-
-	private void StopFire ()
-	{
-		weapons[0].GetComponent<Spawner>().StopSpawning();
-	}
 
  	public void Destruct ()
 	{

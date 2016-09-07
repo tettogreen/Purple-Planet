@@ -3,6 +3,7 @@ using System.Collections;
 
 public class StraightMover : Mover {
 
+//	public bool noRigidbody;
 	public float speed;
 	//Time to allign course if it was changed
 	public float turnSpeed;
@@ -40,8 +41,13 @@ public class StraightMover : Mover {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (rigid.velocity != direction * speed) {
-			StartCoroutine (AlignVelocity());
+		//Moving object if it has no Rigidbody..
+		if (!rigid) {
+			transform.position += direction * Time.deltaTime * speed;
+		}
+		//..Otherwise check if object should allign it's course
+		else if (rigid && rigid.velocity != direction * speed) {
+			StartCoroutine (AlignVelocity ());
 		}
 	}
 
@@ -55,7 +61,9 @@ public class StraightMover : Mover {
 	void SetDirection (Vector3 xAxis, Vector3 yAxis, Vector3 zAxis)
 	{
 		direction = xAxis * direcionX + yAxis * direcionY + zAxis * direcionZ;
-		rigid.velocity = direction * speed;
+		if (rigid) {
+			rigid.velocity = direction * speed;
+		}
 	}
 }
 	

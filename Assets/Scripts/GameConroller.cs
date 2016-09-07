@@ -3,16 +3,15 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameConroller : MonoBehaviour {
+	
+	public GUIText scoreText;
+	public GUIText restartText;
+	public GUIText gameOverText;
+	
+	private bool gameOver;
+	private bool restart;
+	private int score;
 
-	public float startWait;
-//	
-//	public GUIText scoreText;
-//	public GUIText restartText;
-//	public GUIText gameOverText;
-//	
-//	private bool gameOver;
-//	private bool restart;
-//	private int score;
 
 	// Use this for initialization
 	void Start ()
@@ -51,4 +50,11 @@ public class GameConroller : MonoBehaviour {
 //		gameOverText.text = "Game Over!";
 //		gameOver = true;
 //	}
+
+	public void GameOver ()
+    {
+        gameOverText.text = "Game Over!";
+        gameOver = true;
+    }
+
 }
