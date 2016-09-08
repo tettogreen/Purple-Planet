@@ -5,21 +5,22 @@ public class DestructibleWithHealth : Destructible {
 
 	public int scoreValue;
 
-	[SerializeField]
-	private int health;
 	private int defaultHealth;
 
 	[SerializeField]
 	private int collisionDamage = 50;
 	//Seconds between each colision damage
+
+	[SerializeField]
+	protected int health;
+	virtual public int Health 	{ get { return health; } set { health = value; } }
+
 	private const float collisionDamageRate = 1.0f;
-
-
-	public int CollisionDamage 	{ get { return collisionDamage; } }
+	public int CollisionDamage	{ get { return collisionDamage; } }
 
 	void Awake() {
 		Debug.Log(gameObject.name);
-		defaultHealth = health;
+		defaultHealth = Health;
 	}
 
 	void OnCollisionEnter (Collision collision)
@@ -32,14 +33,14 @@ public class DestructibleWithHealth : Destructible {
 
 	public void OnEnable ()
 	{
-		health = defaultHealth;
+		Health = defaultHealth;
 	}
 
 	public void TakeDamage (int damage)
 	{
-		health -= damage;
+		Health -= damage;
 		Debug.Log (name + " takes" + collisionDamage + " damage." + health + " left.");
-		if (health <= 0) {
+		if (Health <= 0) {
 			Destruct(true);
 		}
 

@@ -15,22 +15,36 @@ public class PlayerController : MonoBehaviour
 	public float tilt;
 	public Weapon[] weapons;
 
+	private float nextFire, fireRate;
+
 
 	private Rigidbody rigid;
-
+	private int currentWeapon = 0;
 
 	void Awake ()
 	{
 		rigid = GetComponent<Rigidbody> ();
-		foreach (Weapon weapon in weapons) {
-			weapon.gameObject.SetActive(false);
-		}
-		weapons[0].gameObject.SetActive(true);
+		weapons = GetComponentsInChildren<Weapon>();
 
+	}
+
+	void Update ()
+	{
+		//Shooting
+		if (Input.GetButtonUp ("Fire1")) {
+			Debug.Log("Ended shooting");
+			weapons[currentWeapon].StopFire ();
+		}
+		if (Input.GetButton ("Fire1") ) {
+			Debug.Log("Started shooting");
+			nextFire = Time.time + fireRate;
+			weapons[currentWeapon].StartFire ();
+		}
 	}
 
 	void FixedUpdate ()
 	{
+
 
 		//Movement
 		float moveHorizontal = Input.GetAxis ("Horizontal");

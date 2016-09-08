@@ -9,7 +9,7 @@ public class MaterialRandomizer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rend = GetComponent<Renderer>();
+		rend = GetComponentInChildren<Renderer>();
 		if (rend && materials.Length > 0) {
 //			var rand = Random.Range(0,7);
 //			rend.material.color = colors[Random.Range(0,7)];

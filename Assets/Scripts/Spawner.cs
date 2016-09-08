@@ -10,34 +10,53 @@ public class Spawner : ObjectPool {
 	//Time between each spawn
 	public float spawnWait;
 	//Time between waves
+	public float waveTime;
 	public float waveWait;
 
+	private float nextSpawn = 0;
 	private bool isSpawning = false;
+	private bool noWaves = false;
+	private float waveEnd;
 
 	void Start ()
 	{
 		if (automaticStart) {
 			StartCoroutine (SpawnWaves ());
 		}
+
+		noWaves = true;
 	}
 
 	//Couritne!
 	IEnumerator SpawnWaves ()
 	{
-		if (startWait != 0) {
+		if (startWait != 0f) {
 			yield return new WaitForSeconds (startWait);
 		}
-		while (gameObject != null) {
-			foreach (Transform spawnPoint in SpawnPoints) {
-				GameObject spawnie = PoolObject ();
-				//spawnie.transform.position = spawnValues;
-				spawnie.transform.position = spawnPoint.transform.position;
-				spawnie.transform.rotation = spawnPoint.transform.rotation;
-				spawnie.SetActive (true);
+
+		while ((gameObject != null)) {
+
+
+			if (!noWaves) {
+				waveEnd = Time.time + waveTime;
 			}
-			yield return new WaitForSeconds (spawnWait);
-		}
-		if (waveWait != 0) {
+			
+			while (noWaves || Time.time < waveEnd) {
+				//to prevent double spawning when SpawnWaves is called twice in a short time
+				if (Time.time < nextSpawn) {
+					yield return new WaitForSeconds (nextSpawn - Time.time);
+				}
+//
+				foreach (Transform spawnPoint in SpawnPoints) {
+					GameObject spawnie = PoolObject ();
+					//spawnie.transform.position = spawnValues;
+					spawnie.transform.position = spawnPoint.transform.position;
+					spawnie.transform.rotation = spawnPoint.transform.rotation;
+					spawnie.SetActive (true);
+					nextSpawn = Time.time + spawnWait;
+				}
+				yield return new WaitForSeconds (spawnWait);
+			}
 			yield return new WaitForSeconds (waveWait);
 		}
 	}
