@@ -4,7 +4,7 @@ using System.Linq;
 
 [System.Serializable]
 public class Boundary {
-	public Vector2 Min, Max;
+	public Vector3 Min, Max;
 
 }
 
@@ -13,9 +13,10 @@ public class PlayerController : MonoBehaviour
 	public float speed;
 	public Boundary boundary;
 	public float tilt;
-	public Weapon[] weapons;
 
+	private Weapon[] weapons;
 	private float nextFire, fireRate;
+
 
 
 	private Rigidbody rigid;
@@ -36,23 +37,23 @@ public class PlayerController : MonoBehaviour
 		//Movement
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-		Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
+		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 		//movement = transform.position + movement;
 //            var mousePosition = Input.mousePosition;
 //            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 //		transform.position = Vector2.Lerp (transform.position, movement, speed);
 		rigid.velocity = movement * speed;
 
-		Vector2 min = transform.parent.TransformPoint(boundary.Min);
-		Vector2 max = transform.parent.TransformPoint(boundary.Max);
+		Vector3 min = transform.parent.TransformPoint(boundary.Min);
+		Vector3 max = transform.parent.TransformPoint(boundary.Max);
 		rigid.position = new Vector3 (
 			Mathf.Clamp (rigid.position.x, min.x, max.x),
-			Mathf.Clamp (rigid.position.y, min.y, max.y),
-			0.0f
+			0.0f,
+			Mathf.Clamp (rigid.position.z, min.z, max.z)
 		);
 
 		//Tilt
-		rigid.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
+		rigid.rotation = Quaternion.Euler (movement.z * tilt * 0.5f, 0.0f, -movement.x * tilt);
 	}
 
 	void Update ()
