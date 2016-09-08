@@ -7,7 +7,7 @@ public class SimpleWeaponAI : MonoBehaviour {
 
 	void Awake ()
 	{
-		weapon = GetComponentInChildren<Weapon>();
+		weapon = GetComponent<Weapon>();
 	}
 
 	void OnTriggerEnter (Collider other)

@@ -15,8 +15,15 @@ public class Spawner : ObjectPool {
 
 	private float nextSpawn = 0;
 	private bool isSpawning = false;
-	private bool noWaves = false;
+	private bool noWaves;
 	private float waveEnd;
+
+	protected override void Awake() {
+		base.Awake();
+		if (waveTime == 0 || waveWait == 0) {
+			noWaves = true;
+		}
+	}
 
 	void Start ()
 	{
@@ -24,7 +31,6 @@ public class Spawner : ObjectPool {
 			StartCoroutine (SpawnWaves ());
 		}
 
-		noWaves = true;
 	}
 
 	//Couritne!

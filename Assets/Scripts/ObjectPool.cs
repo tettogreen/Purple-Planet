@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Awake ()
+	protected virtual void Awake ()
 	{
 		pooledObjects = new List<GameObject> ();
 		for (int i = 0; i < poolSize; i++) {

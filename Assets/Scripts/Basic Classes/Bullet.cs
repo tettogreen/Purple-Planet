@@ -11,11 +11,7 @@ public class Bullet : Destructible {
 
 	void Start ()
 	{
-//		if (owner == null) {
-//			FindOwner(transform.parent);
-//			Collider coll = GetComponent<CapsuleCollider> ();
-//			coll.enabled = true;
-//		}
+		FindShooter(transform.parent);
 	}
 
 //	public void SetOwner (GameObject _owner)

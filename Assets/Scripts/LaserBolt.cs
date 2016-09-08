@@ -8,12 +8,12 @@ public class LaserBolt : Bullet
 	{
 		FindShooter(transform.parent);
 
-		if (other.tag == "Boundary" || other.tag == "Bullet" || other.transform == shooter.transform) {
+		if (other.tag == "Trigger" || other.tag == "Bullet" || other.transform == shooter.transform) {
 			return;
 		} else if (other.tag == "Player" || other.tag == "Enemy") {
 			other.GetComponent<DestructibleWithHealth>().TakeDamage(damage);
 		}
-		//Debug.Log(other.gameObject.name);
+		Debug.Log(other.gameObject.name);
 		Destruct();
 	}
 }

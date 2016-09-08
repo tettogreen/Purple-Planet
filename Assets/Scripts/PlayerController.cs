@@ -28,19 +28,6 @@ public class PlayerController : MonoBehaviour
 
 	}
 
-	void Update ()
-	{
-		//Shooting
-		if (Input.GetButtonUp ("Fire1")) {
-			Debug.Log("Ended shooting");
-			weapons[currentWeapon].StopFire ();
-		}
-		if (Input.GetButton ("Fire1") ) {
-			Debug.Log("Started shooting");
-			nextFire = Time.time + fireRate;
-			weapons[currentWeapon].StartFire ();
-		}
-	}
 
 	void FixedUpdate ()
 	{
@@ -68,6 +55,19 @@ public class PlayerController : MonoBehaviour
 		rigid.rotation = Quaternion.Euler (movement.y * tilt * 0.5f, -movement.x * tilt, 0.0f);
 	}
 
+	void Update ()
+	{
+		//Shooting
+		if (Input.GetButtonUp ("Fire1")) {
+			Debug.Log("Ended shooting");
+			weapons[currentWeapon].StopFire ();
+		}
+		if (Input.GetButton ("Fire1") ) {
+			Debug.Log("Started shooting");
+			nextFire = Time.time + fireRate;
+			weapons[currentWeapon].StartFire ();
+		}
+	}
 
  	public void Destruct ()
 	{
