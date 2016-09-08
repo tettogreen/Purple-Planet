@@ -26,7 +26,7 @@ public class DestructibleWithHealth : Destructible {
 	void OnCollisionEnter (Collision collision)
 	{
 		Collider col = collision.collider;
-		if (col.tag == "Player" || col.tag == "Enemy") {
+		if (col.tag == "Player" || col.tag == "Enemy" || col.tag == "Neutral") {
 			TakeDamage (col.GetComponent<DestructibleWithHealth>().CollisionDamage);
 		}
 	}

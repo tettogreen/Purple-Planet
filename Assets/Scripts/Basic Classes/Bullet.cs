@@ -23,7 +23,7 @@ public class Bullet : Destructible {
 	{
 		if (parent == null) {
 			return;
-		} else if (parent.tag == "Player" || parent.tag == "Enemy") {
+		} else if (parent.tag == "Player" || parent.tag == "Enemy" || parent.tag == "Neutral") {
 			shooter = parent;
 		} else {
 			FindShooter (parent.parent);
