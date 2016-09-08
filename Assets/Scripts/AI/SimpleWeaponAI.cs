@@ -5,12 +5,16 @@ using System.Collections;
 //Start fire weapon when player gets into the trigger zone
 public class SimpleWeaponAI : MonoBehaviour {
 
+	public float viewDistance = 20;
 	public Weapon weapon;
 
 
-	void OnTriggerEnter (Collider other)
+	void OnTriggerStay (Collider other)
 	{
-		if (other.tag == "Player" || other.tag == "Neutral") {
+		//Check if target is in front of the object (shootable)
+//		var direction = transform.TransformPoint(transform.up);
+//		bool targertLocked = Physics.Raycast (transform.position, direction, viewDistance);
+		if ( (other.tag == "Player" || other.tag == "Neutral")) {
 			weapon.StartFire();
 		}
 	}
