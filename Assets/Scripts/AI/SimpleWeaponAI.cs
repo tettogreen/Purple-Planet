@@ -5,7 +5,6 @@ using System.Collections;
 //Start fire weapon when player gets into the trigger zone
 public class SimpleWeaponAI : MonoBehaviour {
 
-	public float viewDistance = 20;
 	public Weapon weapon;
 
 
