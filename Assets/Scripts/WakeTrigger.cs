@@ -6,7 +6,7 @@ public class WakeTrigger : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 //		Debug.Log (other.name);
-		if (other.tag == "Enemy" || other.tag == "Neutral" ) {
+		if (other.tag == "Enemy" || other.tag == "Neutral" || other.tag == "AI" || other.tag == "PoolObject") {
 			MonoBehaviour[] scripts = other.GetComponents<MonoBehaviour> ();
 			foreach (MonoBehaviour script in scripts) {
 			EnableComponent (script);

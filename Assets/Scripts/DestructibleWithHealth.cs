@@ -3,6 +3,7 @@ using System.Collections;
 
 public class DestructibleWithHealth : Destructible {
 
+	public GameObject ai;
 	public int scoreValue;
 
 	private int defaultHealth;
@@ -18,9 +19,16 @@ public class DestructibleWithHealth : Destructible {
 	private const float collisionDamageRate = 1.0f;
 	public int CollisionDamage	{ get { return collisionDamage; } }
 
-	void Awake() {
-		Debug.Log(gameObject.name);
+	void Awake ()
+	{
+		Debug.Log (gameObject.name);
 		defaultHealth = Health;
+	}
+
+	void Start() {
+		if (ai) {
+			ai.SetActive (true);
+		}
 	}
 
 	void OnCollisionEnter (Collision collision)

@@ -12,7 +12,7 @@ public class Destructible : MonoBehaviour {
 	public void Destruct ()
 	{
 //		Debug.Log (name + " is dead!");
-		if (transform.parent != null && transform.parent.tag == "PoolObject") {
+		if ( transform.tag == "Bullet" || (transform.parent && transform.parent.tag == "PoolObject" )) {
 			gameObject.SetActive(false);
 		} else {
 			Destroy (gameObject);

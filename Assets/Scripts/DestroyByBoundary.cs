@@ -9,7 +9,7 @@ public class DestroyByBoundary : MonoBehaviour {
 		if (destructible != null) {
 			other.GetComponent<Destructible> ().Destruct ();
 		} else {
-			Destroy(other);
+			Destroy(other.gameObject);
 		}
 //        Debug.Log (other);
     }

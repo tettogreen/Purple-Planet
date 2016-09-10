@@ -17,7 +17,6 @@ public class Spawner : ObjectPool {
 	private bool isSpawning = false;
 	private bool noWaves;
 	private float waveEnd;
-	private Rigidbody spawnerRigid;
 
 	protected override void Awake() {
 		base.Awake();
@@ -25,9 +24,6 @@ public class Spawner : ObjectPool {
 		if (waveTime == 0 || waveWait == 0) {
 			noWaves = true;
 		}
-
-		spawnerRigid = GetComponent<Rigidbody>();
-
 	}
 
 	void Start ()
@@ -60,15 +56,14 @@ public class Spawner : ObjectPool {
 //
 				foreach (Transform spawnPoint in SpawnPoints) {
 					GameObject spawnie = PoolObject ();
-					Rigidbody spawnieRigid = spawnie.GetComponent<Rigidbody> ();
 
 					spawnie.transform.position = spawnPoint.transform.position;
 					spawnie.transform.rotation = spawnPoint.transform.rotation;
 
-					//Add relative velocity
-					if (spawnieRigid && spawnerRigid.velocity.magnitude != 0f ) {
-						Debug.Log(spawnieRigid.velocity);
-					}
+//					//Add relative velocity
+//					if (spawnieRigid && spawnerRigid.velocity.magnitude != 0f ) {
+//						Debug.Log(spawnieRigid.velocity);
+//					}
 
 					spawnie.SetActive (true);
 					nextSpawn = Time.time + spawnWait;

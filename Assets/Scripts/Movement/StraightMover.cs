@@ -42,7 +42,7 @@ public class StraightMover : Mover {
 //	}
 
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
 	{
 		//Moving object if it has no Rigidbody..
 		if (!rigid) {

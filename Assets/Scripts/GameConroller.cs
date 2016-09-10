@@ -8,7 +8,7 @@ public class GameConroller : MonoBehaviour {
 	public GUIText restartText;
 	public GUIText gameOverText;
 	
-	private bool gameOver;
+//	private bool gameOver;
 	private bool restart;
 	private int score;
 
@@ -54,7 +54,7 @@ public class GameConroller : MonoBehaviour {
 	public void GameOver ()
     {
         gameOverText.text = "Game Over!";
-        gameOver = true;
+//        gameOver = true;
     }
 
 }

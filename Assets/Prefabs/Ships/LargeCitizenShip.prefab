@@ -38,12 +38,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000014065280718}
   - 54: {fileID: 54000014135998438}
+  - 64: {fileID: 64000012053017500}
   - 114: {fileID: 114000012223869008}
   - 114: {fileID: 114000010943035682}
   - 114: {fileID: 114000012154238554}
   - 114: {fileID: 114000012000920790}
   - 114: {fileID: 114000011909300646}
-  - 64: {fileID: 64000012053017500}
   m_Layer: 0
   m_Name: LargeCitizenShip
   m_TagString: Neutral
@@ -70,8 +70,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012633272786}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.06, y: -0, z: 2.9}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.10785934, y: 0, z: 15.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012633272786}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f205ce7a6d064d249ef03e0036e674c, type: 3}
   m_Name: 
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012633272786}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c091313ef175a4faf823c883ca80f9bd, type: 3}
   m_Name: 
@@ -197,13 +197,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012633272786}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65e187792f16a4935a26200730762b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
   explosionSound: {fileID: 8300000, guid: 2e953c8b59b294cebba85361fbff18c9, type: 3}
+  ai: {fileID: 0}
   scoreValue: 0
   collisionDamage: 500
   health: 100
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012633272786}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c27acf57afd1645afb4a12f0d02b9c69, type: 3}
   m_Name: 
@@ -224,7 +225,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012633272786}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a92bc8b43e8142779843199ae10f776, type: 3}
   m_Name: 

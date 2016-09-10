@@ -12,6 +12,7 @@ public class Bullet : Destructible {
 	void Start ()
 	{
 		FindShooter(transform.parent);
+		transform.parent = null;
 	}
 
 //	public void SetOwner (GameObject _owner)

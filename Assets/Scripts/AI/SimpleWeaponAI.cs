@@ -7,7 +7,6 @@ public class SimpleWeaponAI : MonoBehaviour {
 
 	public Weapon weapon;
 
-
 	void OnTriggerStay (Collider other)
 	{
 		//Check if target is in front of the object (shootable)

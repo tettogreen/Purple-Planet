@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 	public float tilt;
 
 	private Weapon[] weapons;
-	private float nextFire, fireRate;
+//	private float nextFire, fireRate;
 
 
 
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if (Input.GetButton ("Fire1") ) {
 			Debug.Log("Started shooting");
-			nextFire = Time.time + fireRate;
+//			nextFire = Time.time + fireRate;
 			weapons[currentWeapon].StartFire ();
 		}
 	}
