@@ -19,16 +19,7 @@ public class Weapon : MonoBehaviour {
 
 		void Update ()
 	{
-//		//Shooting
-//		if (Input.GetButtonDown ("Fire1") && Time.time > nextFire) {
-//			Debug.Log("Started shooting");
-//			nextFire = Time.time + fireRate;
-//			StartFire ();
-//		}
-//		if (Input.GetButtonUp ("Fire1")) {
-//			Debug.Log("Ended shooting");
-//			StopFire ();
-//		}
+
 	}
 	
 	public void StartFire ()

@@ -160,7 +160,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f205ce7a6d064d249ef03e0036e674c, type: 3}
   m_Name: 
@@ -174,13 +174,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c9dca9d6ce144206ae6be59ab302d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   x: 0
-  y: 1
+  y: 0
   z: 0
 --- !u!114 &114000012019252790
 MonoBehaviour:
@@ -196,6 +196,7 @@ MonoBehaviour:
   speed: 20
   turnSpeed: 0
   timeBeforeAlign: 0
+  relativeObject: {fileID: 0}
   direcionX: 0
   direcionY: 0
   direcionZ: 1
