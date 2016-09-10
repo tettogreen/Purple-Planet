@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour {
 	public void StartFire ()
 	{
 		spawner.StartSpawning();
-		if (shotSound) {
+		if (shotSound && !shotSound.isPlaying) {
 			shotSound.loop = true;
 			shotSound.Play ();
 		}

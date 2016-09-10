@@ -8,7 +8,7 @@ public class LockRotation : MonoBehaviour {
 	public bool z;
 
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
 	{
 		Vector3 rotation = transform.rotation.eulerAngles;
 		if (x) {

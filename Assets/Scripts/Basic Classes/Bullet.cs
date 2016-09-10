@@ -29,4 +29,6 @@ public class Bullet : Destructible {
 			FindShooter (parent.parent);
 		}
 	}
+
+
 }

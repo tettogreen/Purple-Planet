@@ -25,7 +25,6 @@ public class StraightMover : Mover {
 
 	private Rigidbody rigid;
 	private Vector3 velocity;
-
 	// Use this for initialization
 	void Start ()
 	{
@@ -50,7 +49,7 @@ public class StraightMover : Mover {
 			transform.position += velocity * Time.deltaTime;
 		}
 		//..Otherwise check if object should allign it's course
-		else if (rigid && rigid.velocity != velocity) {
+		else if (rigid.velocity != velocity) {
 			StartCoroutine (AlignVelocity ());
 		} else {
 			StopAllCoroutines();
@@ -68,7 +67,7 @@ public class StraightMover : Mover {
 	{
 		//Calculate velocity depending on the directions
 		velocity = xAxis * direcionX + yAxis * direcionY + zAxis * direcionZ;
-		velocity = velocity * speed;
+		velocity *= speed;
 
 		//Add relative objects velocity if it exists
 //		if (transform.parent) {
