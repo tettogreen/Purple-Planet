@@ -2,11 +2,10 @@
 using System.Collections;
 
 public class Mover : MonoBehaviour {
-	protected Rigidbody rigid;
 
 	// Use this for initialization
-	void Awake () {
-		rigid = GetComponent<Rigidbody>();	
+	void Start () {
+	
 	}
 	
 	// Update is called once per frame
