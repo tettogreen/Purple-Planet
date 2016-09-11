@@ -6,12 +6,12 @@ public class LaserBolt : Bullet
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.tag == "Trigger" || other.tag == "Bullet" || other.transform == shooter.transform) {
+		if (other && other.tag == "Trigger" || other.tag == "Bullet" || other.transform == shooter.transform) {
 			return;
-		} else if (other.tag == "Player" || other.tag == "Enemy" || other.tag == "Neutral") {
+		} else if (other && other.tag == "Player" || other.tag == "Enemy" || other.tag == "Neutral") {
 			other.GetComponent<DestructibleWithHealth>().TakeDamage(damage);
 		}
-		Debug.Log(other.gameObject.name);
+//		Debug.Log(other.gameObject.name);
 		Destruct();
 	}
 }
