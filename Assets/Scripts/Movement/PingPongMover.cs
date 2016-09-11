@@ -14,13 +14,16 @@ public class PingPongMover : Mover{
 	public float speed;
 
 	private float nextChangeTime;
+	private Vector3 targetVelocity;
 
 //	private Vector3 minimalX, maximumX;
 	
 	// Use this for initialization
 	void Start () {
 //		initialPosition = transform.position;
-		rigid.velocity += new Vector3 (initialDirection * speed , 0f, 0f);
+		velocityModification = new Vector3 (initialDirection * speed , 0f, 0f);
+		rigid.velocity += velocityModification;
+		targetVelocity = rigid.velocity;
 		nextChangeTime = Time.time + time / 2;
 	}
 	
@@ -32,8 +35,18 @@ public class PingPongMover : Mover{
 //		}
 
 		if (Time.time > nextChangeTime) {
-			rigid.velocity = new Vector3 (-rigid.velocity.x, rigid.velocity.y, rigid.velocity.z);
+
+			//Legacy version (no revert option)
+//			velocityModification = new Vector3 (-rigid.velocity.x, rigid.velocity.y, rigid.velocity.z);
+//			rigid.velocity = Vector3.Lerp (rigid.velocity, velocityModification, speed)
+
+			velocityModification = new Vector3 (-2 * rigid.velocity.x, 0f, 0f);
+			targetVelocity = rigid.velocity + velocityModification;
 			nextChangeTime = Time.time + time;
+		}
+
+		if (rigid.velocity != targetVelocity) {
+			rigid.velocity = Vector3.Lerp (rigid.velocity, targetVelocity, 0.05f * speed);
 		}
 	}
 }
