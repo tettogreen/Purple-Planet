@@ -8,7 +8,7 @@ public class Mover : MonoBehaviour {
 
 
 	//TODO Create a variable which will contain the last mover's velocity modification to revert it.
-	protected Vector3 lastVelocityModification;
+	protected Vector3 velocityModification;
 
 	// Use this for initialization
 	void Awake () {
