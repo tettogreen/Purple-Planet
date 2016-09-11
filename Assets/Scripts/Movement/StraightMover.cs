@@ -8,10 +8,7 @@ public class StraightMover : Mover {
 	//Time to allign course if it was changed
 	public float turnSpeed;
 	public float timeBeforeAlign;
-
-	//Start velocity will be relative to this object, 
-	//	e.g. when ship is flying and shooting start vel of bullets should be equal to ships velocity + it's own velocity
-	//public Rigidbody relativeObject;
+	public bool alignVelocity;
 
 	[Range(-1, 1)]
 	public int direcionX;
@@ -22,13 +19,12 @@ public class StraightMover : Mover {
 	[Range(-1, 1)]
 	public int direcionZ;
 	public bool useGlobalSpace;
+	
 
-	private Rigidbody rigid;
 	private Vector3 velocity;
 	// Use this for initialization
 	void Start ()
 	{
-		rigid = GetComponent<Rigidbody> ();
 		if (useGlobalSpace) {
 			SetVelocity (Vector3.right, Vector3.up, Vector3.forward);
 		} else {
@@ -49,15 +45,21 @@ public class StraightMover : Mover {
 			transform.position += velocity * Time.deltaTime;
 		}
 		//..Otherwise check if object should allign it's course
-		else if (rigid.velocity != velocity) {
-			StartCoroutine (AlignVelocity ());
-		} else {
-			StopAllCoroutines();
+		else if (alignVelocity) {
+
+			if (rigid.velocity != velocity) {
+				StartCoroutine (AlignVelocity ());
+			} else {
+				StopAllCoroutines ();
+			}
+
 		}
+
 	}
 
 	IEnumerator AlignVelocity ()
 	{
+		
 		yield return new WaitForSeconds(timeBeforeAlign);
 		rigid.velocity = Vector3.Lerp(rigid.velocity, velocity, speed * turnSpeed );
 	}
