@@ -12,6 +12,8 @@ public class DestructibleWithHealth : Destructible {
 	private int collisionDamage = 50;
 	//Seconds between each colision damage
 
+	private LowHPFleet lowHPController;
+
 	[SerializeField]
 	protected int health;
 	virtual public int Health 	{ get { return health; } set { health = value; } }
@@ -26,6 +28,9 @@ public class DestructibleWithHealth : Destructible {
 	}
 
 	void Start() {
+
+		lowHPController = GetComponent<LowHPFleet>();
+
 		if (ai) {
 			ai.SetActive (true);
 		}
@@ -47,9 +52,11 @@ public class DestructibleWithHealth : Destructible {
 	public void TakeDamage (int damage)
 	{
 		Health -= damage;
-		Debug.Log (name + " takes" + collisionDamage + " damage." + health + " left.");
+		Debug.Log (name + " takes" + damage + " damage." + health + " left.");
 		if (Health <= 0) {
 			Destruct(true);
+		} else if (lowHPController) {
+			lowHPController.CheckHealth(Health);
 		}
 
 	}
