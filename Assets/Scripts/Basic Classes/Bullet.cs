@@ -9,7 +9,7 @@ public class Bullet : Destructible {
 	protected int damage;
 	//public int Damage {get { return damage; } }
 
-	void Start ()
+	void Awake ()
 	{
 		FindShooter(transform.parent);
 		transform.parent = null;

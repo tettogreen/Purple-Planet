@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
+
 public class LerpAngVelocity : MonoBehaviour {
 
+	Rigidbody rigid;
+
+	void Start ()
+	{
+		rigid = GetComponent<Rigidbody> ();
+	}
 
 	void FixedUpdate () {
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
-		if (rigidbody.angularVelocity != Vector3.zero) {
-			rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, new Vector3(0f, 0f, 0f), 1f);
+		if (rigid.angularVelocity != Vector3.zero) {
+			rigid.angularVelocity = Vector3.Lerp(rigid.angularVelocity, new Vector3(0f, 0f, 0f), 1f);
 		}
 	}
 }

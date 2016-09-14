@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Spawner))]
+
 public class Weapon : MonoBehaviour {
 
 

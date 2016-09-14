@@ -8,6 +8,7 @@ public class Boundary {
 
 }
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour 
 {
 	public float speed;
