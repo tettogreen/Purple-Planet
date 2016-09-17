@@ -7,7 +7,7 @@ using System.Collections;
 public class LowHPFleet : MonoBehaviour {
 
 	[Range(0,1)]
-	public float lowHPLevel = 0.3f;
+	public float lowHPPercent = 0.3f;
 	public float fleetSpeedMultiplier;
 
 	private Rigidbody rigid;
@@ -19,7 +19,7 @@ public class LowHPFleet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rigid = GetComponent<Rigidbody>();
-		lowHP = GetComponent<DestructibleWithHealth>().Health * lowHPLevel;
+		lowHP = GetComponent<DestructibleWithHealth>().Health * lowHPPercent;
 	}
 
 	void FixedUpdate ()
