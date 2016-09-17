@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody rigid;
 	private int currentWeapon = 0;
+	private Vector3 forceVector;
 
 	void Awake ()
 	{
@@ -38,12 +39,20 @@ public class PlayerController : MonoBehaviour
 		//Movement
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-		//movement = transform.position + movement;
-//            var mousePosition = Input.mousePosition;
-//            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-//		transform.position = Vector2.Lerp (transform.position, movement, speed);
-		rigid.velocity = movement * speed;
+		Vector3 movementDirection = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+		forceVector = movementDirection * speed;
+		if (rigid.velocity.magnitude < forceVector.magnitude) {
+			rigid.AddForce (forceVector);
+		} else {
+			Debug.Log ("Player:Velocity Maximum: " + rigid.velocity.magnitude);
+		}
+
+////			movement = transform.position + movement;
+////            var mousePosition = Input.mousePosition;
+////            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+////		transform.position = Vector2.Lerp (transform.position, movement, speed);
+//
+//		rigid.velocity = movementDirection * speed;
 
 		Vector3 min = transform.parent.TransformPoint(boundary.Min);
 		Vector3 max = transform.parent.TransformPoint(boundary.Max);
@@ -53,8 +62,11 @@ public class PlayerController : MonoBehaviour
 			Mathf.Clamp (rigid.position.z, min.z, max.z)
 		);
 
+		//mass
+		Debug.Log ("Player mass: " + rigid.mass);
+
 		//Tilt
-		rigid.rotation = Quaternion.Euler (movement.z * tilt * 0.5f, 0.0f, -movement.x * tilt);
+		rigid.rotation = Quaternion.Euler (movementDirection.z * tilt * 0.5f, 0.0f, -movementDirection.x * tilt);
 	}
 
 	void Update ()

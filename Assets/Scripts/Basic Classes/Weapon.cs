@@ -1,22 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Spawner))]
-
 public class Weapon : MonoBehaviour {
 
+	//Weight of the gun! Affects shooter's mass.
+	public float weight;
 
-	public GameObject shot;
+	//Shooting charateristics
+	public float fireRate;
+	public float coolDown;
+	public GameObject bulletObject;
 	public Transform[] shotSpawns;
 
 	//Audio
-	public AudioSource shotSound;
+	public AudioSource shotSound; 
 
-	private Spawner spawner;
+	protected Spawner spawner;
 
 	void Start ()
 	{
 		spawner = GetComponent<Spawner>();
+		spawner.SpawnPoints = shotSpawns;
+		spawner.SpawningSettings (0f, fireRate, coolDown);
+
 	}
 
 		void Update ()

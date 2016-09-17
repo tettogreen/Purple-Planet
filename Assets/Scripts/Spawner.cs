@@ -3,20 +3,29 @@ using System.Collections;
 
 public class Spawner : ObjectPool {
 
-	public Transform[] SpawnPoints;
-	public bool automaticStart;
+	public bool automaticStart = false;
 	//Time before the first spawn
-	public float startWait;
+	public float startWait {get; set;}
 	//Time between each spawn
 	public float spawnWait;
 	//Time between waves
-	public float waveTime;
 	public float waveWait;
+	public float waveTime;
 
-	private float nextSpawn = 0;
+	private float nextSpawn;
 	private bool isSpawning = false;
 	private bool noWaves;
 	private float waveEnd;
+
+
+
+	[SerializeField]
+	protected Transform[] spawnPoints;
+	public Transform[] SpawnPoints {	
+		get { return spawnPoints; }
+		set	{ spawnPoints = value; } 
+	}
+
 
 	protected override void Awake() {
 		base.Awake();
@@ -74,6 +83,7 @@ public class Spawner : ObjectPool {
 		}
 	}
 
+
 	public void StartSpawning (float startDelay, float spawnInterval, float waveInterval)
 	{
 		startDelay = startWait;
@@ -96,5 +106,16 @@ public class Spawner : ObjectPool {
 			StopAllCoroutines ();
 			isSpawning = false;
 		}
+	}
+
+	/// <summary>
+	/// Set time before the first wave, between spawns and between the waves
+	/// </summary>
+	public void SpawningSettings (  float beforeFirstWave, float betweenSpawn, float betweenWaves ) 
+	{
+//		pooledObject = spawnieObject;
+		startWait = beforeFirstWave;
+		spawnWait = betweenSpawn;
+		waveWait = betweenWaves;
 	}
 }
