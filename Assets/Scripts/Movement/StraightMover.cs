@@ -54,7 +54,15 @@ public class StraightMover : Mover {
 			}
 
 		}
+		Vector3 acceleration;
+		Vector3 force = rigid.mass * acceleration;
+		if (rigid.velocity >= maxVelocity) {
+			resistanceForce = -force;
+		} else {
+			resistanceForce = -rigid.mass * acceleration * Mathf.SmoothDamp (0f, resistanceForce,);
 
+		}
+		rigid.AddForce(force + resistanceForce);
 	}
 
 	IEnumerator AlignVelocity ()

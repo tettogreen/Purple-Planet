@@ -93,7 +93,7 @@ GameObject:
   - 65: {fileID: 65000011313586094}
   m_Layer: 8
   m_Name: AI
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011492086104}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.23, y: 0, z: 15.17}
+  m_LocalPosition: {x: -0.07, y: 0, z: 12.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -242,7 +242,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011492086104}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 12
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -379,14 +379,11 @@ MonoBehaviour:
   pooledObject: {fileID: 100000, guid: f4ec271e525e14ca9927a07e6a2e153d, type: 2}
   poolSize: 20
   willGrow: 1
-  SpawnPoints:
-  - {fileID: 4000012776186510}
-  - {fileID: 4000010485401586}
-  automaticStart: 0
-  startWait: 0
+  automaticStart: 1
   spawnWait: 0.01612903
-  waveTime: 0.2
   waveWait: 0.4
+  waveTime: 0.2
+  spawnPoints: []
 --- !u!114 &114000010730184196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -409,7 +406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b922cf71135341258abe5701bdc4974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shot: {fileID: 0}
+  weight: 0
+  fireRate: 0
+  coolDown: 0
+  bulletObject: {fileID: 0}
   shotSpawns:
   - {fileID: 4000012776186510}
   - {fileID: 4000010485401586}
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468b212aad7f04ae1a055d9df97e17bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 3
+  time: 5
   initialDirection: 1
   speed: 2
 --- !u!114 &114000013287329354
