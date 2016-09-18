@@ -1340,6 +1340,21 @@ Prefab:
       propertyPath: spawnWait
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010291022178, guid: b06e85e9ee49a40ed9d7dbf65366e238,
+        type: 2}
+      propertyPath: velocity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010291022178, guid: b06e85e9ee49a40ed9d7dbf65366e238,
+        type: 2}
+      propertyPath: maxVelocity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010291022178, guid: b06e85e9ee49a40ed9d7dbf65366e238,
+        type: 2}
+      propertyPath: enginePower
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b06e85e9ee49a40ed9d7dbf65366e238, type: 2}
   m_IsPrefabParent: 0

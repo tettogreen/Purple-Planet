@@ -6,7 +6,7 @@ public class MusicPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Awake ()
 	{
-		Debug.Log (Time.time + ": Awake()");
+//		Debug.Log (Time.time + ": Awake()");
 		if (instance != null) {
 			Destroy (gameObject);
 			Debug.Log (Time.time + ": Duplicated copy of MusicPlayer was destroyed");
@@ -16,7 +16,7 @@ public class MusicPlayer : MonoBehaviour {
 		}
 	}
 	void Start () {
-		Debug.Log (Time.time + ": Start()");
+//		Debug.Log (Time.time + ": Start()");
 	}
 	
 	// Update is called once per frame

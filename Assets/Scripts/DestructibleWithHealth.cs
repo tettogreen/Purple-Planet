@@ -23,7 +23,6 @@ public class DestructibleWithHealth : Destructible {
 
 	void Awake ()
 	{
-		Debug.Log (gameObject.name);
 		defaultHealth = Health;
 	}
 

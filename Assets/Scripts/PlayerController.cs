@@ -11,7 +11,8 @@ public class Boundary {
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour 
 {
-	public float speed;
+	public float maxVelocity;
+	public float enginePower;
 	public Boundary boundary;
 	public float tilt;
 
@@ -40,20 +41,39 @@ public class PlayerController : MonoBehaviour
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 		Vector3 movementDirection = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-		forceVector = movementDirection * speed;
-		if (rigid.velocity.magnitude < forceVector.magnitude) {
-			rigid.AddForce (forceVector);
-		} else {
-			Debug.Log ("Player:Velocity Maximum: " + rigid.velocity.magnitude);
-		}
+		movementDirection = Vector3.ClampMagnitude(movementDirection, 1f);
+//		if (movementDirection != Vector3.zero) {
+//			forceVector = movementDirection * enginePower;
+//			if (rigid.velocity.magnitude < maxVelocity) {
+//				rigid.AddForce (forceVector);
+//			} else {
+//				rigid.velocity = Vector3.ClampMagnitude (rigid.velocity, maxVelocity);
+//				Debug.Log ("Player:Velocity Maximum: " + rigid.velocity.magnitude);
+//			}
+//		} else {
+////			forceVector = Vector3.Lerp (rigid.velocity, Vector3.zero, 0.05f);
+////			forceVector = Vector3.SmoothDamp (rigid.velocity, Vector3.zero, 0.95f,
+////			Vector3 impulse = -forceVector * rigid.mass;
+////			rigid.AddForce (impulse, ForceMode.Impulse);
+////			= Vector3.Lerp (rigid.velocity, Vector3.zero, 0.2f);
+//		}
+//		forceVector = movementDirection * enginePower / maxVelocity;
+
+		float velocity =  Mathf.Sqrt(2 * enginePower * movementDirection.magnitude * Time.fixedDeltaTime / rigid.mass); // v = sqrt(2*P*t/m) <= E = m*v^2/2  &  E = P*t
+		Vector3 newVelocity =  Vector3.ClampMagnitude (movementDirection.normalized * velocity, maxVelocity);
+		forceVector = (newVelocity - rigid.velocity) * rigid.mass / Time.fixedDeltaTime;
+		rigid.AddForce (forceVector);
+
+
 
 ////			movement = transform.position + movement;
 ////            var mousePosition = Input.mousePosition;
 ////            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 ////		transform.position = Vector2.Lerp (transform.position, movement, speed);
-//
-//		rigid.velocity = movementDirection * speed;
 
+//		rigid.velocity = movementDirection * maxVelocity;
+//		Debug.Log (Time.time + ": " + movementDirection );
+//
 		Vector3 min = transform.parent.TransformPoint(boundary.Min);
 		Vector3 max = transform.parent.TransformPoint(boundary.Max);
 		rigid.position = new Vector3 (
@@ -63,7 +83,7 @@ public class PlayerController : MonoBehaviour
 		);
 
 		//mass
-		Debug.Log ("Player mass: " + rigid.mass);
+//		Debug.Log ("Player mass: " + rigid.mass);
 
 		//Tilt
 		rigid.rotation = Quaternion.Euler (movementDirection.z * tilt * 0.5f, 0.0f, -movementDirection.x * tilt);
